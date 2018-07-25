@@ -106,17 +106,21 @@ defaultproperties
     KDeathUpKick=0
     KDeathVel=0
 
+    GoreDamageGroup==DGT_Rifle
     KnockdownPower=0
     StunPower=0
     StumblePower=200
     GunHitPower=0
     MeleeHitPower=0
-    BleedPower=75
+    BleedPower=35
+
+    BloodSpread=0.2
+	BloodScale=0.3
 
     DoT_Type=DOT_Bleeding
-    DoT_Duration=5.0 //10
-    DoT_Interval=1.0 //1.0
-    DoT_DamageScale=0.15 //0.5
+    DoT_Duration=2.5 //10
+    DoT_Interval=0.5 //1.0
+    DoT_DamageScale=0.10 //0.5
 	bStackDoT=true
 
     WeaponDef=class'VincWeapon.KFWeapDef_M14_Medic'
