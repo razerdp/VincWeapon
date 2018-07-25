@@ -79,6 +79,6 @@ defaultproperties
 	CameraLensEffectTemplate=class'KFCameraLensEmit_Fire'
 	BurnDamageType=class'KFDT_Fire_DragonsBreathDoT'
 
-	WeaponDef=class'VincWeapon.KFWeapDef_AA12_DragonsFire'
+	WeaponDef=class'VincWeaponBeta.KFWeapDef_AA12_DragonsFire'
 	ModifierPerkList(1)=class'KFPerk_Firebug'
 }

@@ -119,7 +119,7 @@ defaultproperties
     DoT_DamageScale=0.15 //0.5
 	bStackDoT=true
 
-    WeaponDef=class'VincWeapon.KFWeapDef_M14_Medic'
+    WeaponDef=class'VincWeaponBeta.KFWeapDef_M14_Medic'
     ModifierPerkList(0)=class'KFPerk_FieldMedic'
 
     TubeAttachClass=class'KFWeapActor_Hemogoblin_Tube'
