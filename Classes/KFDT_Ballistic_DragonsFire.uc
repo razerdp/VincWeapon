@@ -63,9 +63,9 @@ static function ApplySecondaryDamage( KFPawn Victim, int DamageTaken, optional C
 defaultproperties
 {
 	DoT_Type=DOT_Fire
-	DoT_Duration=2.0
+	DoT_Duration=1.8
 	DoT_Interval=0.5
-	DoT_DamageScale=1.0
+	DoT_DamageScale=1.5
 	bIgnoreSelfInflictedScale=true
 
 	KDamageImpulse=0

@@ -101,7 +101,7 @@ defaultproperties
 
 	// Ammo
 	MagazineCapacity[0]=12
-	SpareAmmoCapacity[0]=108
+	SpareAmmoCapacity[0]=96
 	InitialSpareMags[0]=2
 	bCanBeReloaded=true
 	bReloadFromMagazine=true
@@ -136,10 +136,10 @@ defaultproperties
 	FiringStatesArray(DEFAULT_FIREMODE)=WeaponSingleFiring
 	WeaponFireTypes(DEFAULT_FIREMODE)=EWFT_InstantHit
 	WeaponProjectiles(DEFAULT_FIREMODE)=class'KFProj_Bullet_M14EBR'
-	InstantHitDamage(DEFAULT_FIREMODE)=80.0 //90
+	InstantHitDamage(DEFAULT_FIREMODE)=90.0 //90
 	InstantHitDamageTypes(DEFAULT_FIREMODE)=class'KFDT_Ballistic_M14_Medic'
-	FireInterval(DEFAULT_FIREMODE)=0.3 //0.2
-	PenetrationPower(DEFAULT_FIREMODE)=2.0
+	FireInterval(DEFAULT_FIREMODE)=0.30 //200RPM
+	PenetrationPower(DEFAULT_FIREMODE)=1.5
 	Spread(DEFAULT_FIREMODE)=0.006
 	FireOffset=(X=30,Y=3.0,Z=-2.5)
 
@@ -172,5 +172,5 @@ defaultproperties
 
 	// Weapon Upgrade stat boosts
 	WeaponUpgrades[1]=(IncrementDamage=1.2f,IncrementHeal=1.1f,IncrementWeight=1)
-	WeaponUpgrades[2]=(IncrementDamage=1.4f,IncrementHeal=1.2f,IncrementWeight=2)
+	WeaponUpgrades[2]=(IncrementDamage=1.35f,IncrementHeal=1.2f,IncrementWeight=2)
 }
