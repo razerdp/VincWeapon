@@ -1,4 +1,4 @@
-﻿class KFWeapDef_M14_Medic extends KFWeaponDefinition
+class KFWeapDef_M14_Medic extends KFWeaponDefinition
 	abstract;
 
 static function string GetItemName()
