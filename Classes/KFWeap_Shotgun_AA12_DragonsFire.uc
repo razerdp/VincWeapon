@@ -74,29 +74,27 @@ defaultproperties
 	FiringStatesArray(DEFAULT_FIREMODE)=WeaponFiring
 	WeaponFireTypes(DEFAULT_FIREMODE)=EWFT_Projectile
 	WeaponProjectiles(DEFAULT_FIREMODE)=class'KFProj_Bullet_AA12_DragonsFire'
-	InstantHitDamage(DEFAULT_FIREMODE)=15.0 //25 //20
+	InstantHitDamage(DEFAULT_FIREMODE)=12.0 //25 //20
 	InstantHitDamageTypes(DEFAULT_FIREMODE)=class'KFDT_Ballistic_DragonsFire'
-	PenetrationPower(DEFAULT_FIREMODE)=2.0
-	FireInterval(DEFAULT_FIREMODE)=0.25 // 300 RPM
+	PenetrationPower(DEFAULT_FIREMODE)=0.0
+	FireInterval(DEFAULT_FIREMODE)=0.25 // 240 RPM
 	FireOffset=(X=30,Y=5,Z=-4)
 	Spread(DEFAULT_FIREMODE)=0.08
 	// Shotgun
-	NumPellets(DEFAULT_FIREMODE)=8
+	NumPellets(DEFAULT_FIREMODE)=10
 
 	// ALT_FIREMODE
 	FireModeIconPaths(ALTFIRE_FIREMODE)=Texture2D'ui_firemodes_tex.UI_FireModeSelect_ShotgunSingle'
 	FiringStatesArray(ALTFIRE_FIREMODE)=WeaponSingleFiring
 	WeaponFireTypes(ALTFIRE_FIREMODE)=EWFT_Projectile
 	WeaponProjectiles(ALTFIRE_FIREMODE)=class'KFProj_Bullet_AA12_DragonsFire'
-	InstantHitDamage(ALTFIRE_FIREMODE)=15.0 //25 //20
+	InstantHitDamage(ALTFIRE_FIREMODE)=12.0 //25 //20
 	InstantHitDamageTypes(ALTFIRE_FIREMODE)=class'KFDT_Ballistic_DragonsFire'
-	PenetrationPower(ALTFIRE_FIREMODE)=2.0
-	FireInterval(ALTFIRE_FIREMODE)=0.25 // 300 RPM
-	Spread(ALTFIRE_FIREMODE)=0.06
-
-
+	PenetrationPower(ALTFIRE_FIREMODE)=0.0
+	FireInterval(ALTFIRE_FIREMODE)=0.30 // 200 RPM
+	Spread(ALTFIRE_FIREMODE)=0.04
 	// Shotgun
-	NumPellets(ALTFIRE_FIREMODE)=8
+	NumPellets(ALTFIRE_FIREMODE)=10
 
 
 	// BASH_FIREMODE
@@ -148,5 +146,5 @@ defaultproperties
 	WeaponFireWaveForm=ForceFeedbackWaveform'FX_ForceFeedback_ARCH.Gunfire.Heavy_Recoil'
 
 	// Weapon Upgrade stat boosts
-	WeaponUpgrades[1]=(IncrementDamage=1.15f,IncrementWeight=1)
+	WeaponUpgrades[1]=(IncrementDamage=1.20f,IncrementWeight=1)
 }
