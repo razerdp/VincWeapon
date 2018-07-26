@@ -438,7 +438,7 @@ defaultproperties
 
 	// Ammo
 	MagazineCapacity[0]=1
-	SpareAmmoCapacity[0]=4
+	SpareAmmoCapacity[0]=5
 	InitialSpareMags[0]=1
 	AmmoPickupScale[0]=1.0
 

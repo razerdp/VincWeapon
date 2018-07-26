@@ -30,13 +30,13 @@ defaultproperties
 	DoT_Type=DOT_Fire
 	DoT_Duration=1 //5.0
 	DoT_Interval=0.25
-	DoT_DamageScale=0.8
+	DoT_DamageScale=1
 	bIgnoreSelfInflictedScale=true
 
 
-	BurnPower=5.5 //2.5
+	BurnPower=10 //2.5
 	MicrowavePower=10
-	StumblePower=30
+	StumblePower=0
 
 	EffectGroup=255 //None
 	bCanObliterate=true

@@ -53,7 +53,7 @@ var ParticleSystem BlinkFX;
 var ParticleSystemComponent BlinkPSC;
 
 var(Projectile) instanced editinline KFGameExplosion	MicroWaveExplosionTemplate;
-var GameExplosionActor MicroWaveExplosionActor;
+var KFExplosionActorReplicated MicroWaveExplosionActor;
 
 /** Id for skin override */
 var repnotify int WeaponSkinId;
@@ -608,12 +608,14 @@ function Detonate()
 
 simulated function startMicroWaveExplode(vector HitLocation, vector HitNormal)
 {
-	MicroWaveExplosionActor = Spawn(class'KFExplosionActor', self,, HitLocation, rotator(HitNormal));
-	`log("microWaveExplose  >>" @bMaxMicroWaveExplosionCount);
+	MicroWaveExplosionActor = Spawn(class'KFExplosionActorReplicated', self,, HitLocation, rotator(HitNormal));
 	if (MicroWaveExplosionActor != None)
 	{
 		MicroWaveExplosionActor.Instigator = Instigator;
 		MicroWaveExplosionActor.InstigatorController = InstigatorController;
+		// enable muzzle location sync
+		MicroWaveExplosionActor.bReplicateInstigator = true;
+		MicroWaveExplosionActor.bSyncParticlesToMuzzle = true;
 
 		PrepareExplosionTemplate();
 
@@ -646,11 +648,20 @@ simulated function ReExplodeMicroWave()
 {
 	local vector ExplosionNormal;
 
+	if (KFPawn(StuckToActor)!=none)
+	{
+		if (KFPawn(StuckToActor).Health<=0)
+		{
+			Destroyed();
+			return;
+		}
+		
+	}
+
 	if (bMaxMicroWaveExplosionCount<=0)
 	{
 		return;
 	}
-	`log("ReExplodeMicroWave  >>" @bMaxMicroWaveExplosionCount);
 
 	bMaxMicroWaveExplosionCount--;
 	ExplosionNormal = vect(0,0,1) >> Rotation;
@@ -677,6 +688,16 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 simulated function ReExplode()
 {
 	local vector ExplosionNormal;
+
+	if (KFPawn(StuckToActor)!=none)
+	{
+		if (KFPawn(StuckToActor).Health<=0)
+		{
+			Destroyed();
+			return;
+		}
+		
+	}
 
 	if (bMaxExplosionCount<=0)
 	{
@@ -869,11 +890,11 @@ defaultproperties
 		KnockDownStrength=0
 		FractureMeshRadius=200.0
 		FracturePartVel=500.0
-		// ExplosionEffects=KFImpactEffectInfo'WEP_C4_ARCH.C4_Explosion'
+
 		ExplosionEffects=KFImpactEffectInfo'WEP_SeekerSix_ARCH.FX_SeekerSix_Explosion'
-		
-		// ExplosionSound=AkEvent'WW_WEP_EXP_C4.Play_WEP_EXP_C4_Explosion'
-		ExplosionSound=AkEvent'WW_WEP_Seeker_6.Play_WEP_Seeker_6_Explosion'
+		// ExplosionSound=AkEvent'WW_WEP_SA_HX25.Play_WEP_SA_HX25_Explosion'
+		ExplosionSound=none
+
 
 
         // Dynamic Light
@@ -916,10 +937,10 @@ defaultproperties
 		FractureMeshRadius=200.0
 		FracturePartVel=500.0
 		// ExplosionEffects=KFImpactEffectInfo'WEP_C4_ARCH.C4_Explosion'
-		ExplosionEffects=KFImpactEffectInfo'WEP_Microwave_Gun_ARCH.Beam_Impacts'
+		ExplosionEffects=KFImpactEffectInfo'wep_molotov_arch.Molotov_GroundFire'
 		
 		// ExplosionSound=AkEvent'WW_WEP_EXP_C4.Play_WEP_EXP_C4_Explosion'
-		ExplosionSound=AkEvent'WW_WEP_SA_Microwave_Gun.Play_SA_MicrowaveGun_Fire_3P_Loop'
+		ExplosionSound=AkEvent'WW_WEP_SA_Microwave_Gun.Play_SA_MicrowaveGun_Fire_Secondary_1P'
 
 
 	    // Dynamic Light

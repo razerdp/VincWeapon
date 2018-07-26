@@ -41,8 +41,8 @@ defaultproperties
 	KDeathUpKick=1000
 	KDeathVel=300
 
-	KnockdownPower=150
-	StumblePower=400
+	KnockdownPower=0
+	StumblePower=0
 	BurnPower=2
 
 	// DOT
