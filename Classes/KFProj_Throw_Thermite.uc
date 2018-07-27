@@ -608,7 +608,7 @@ function Detonate()
 
 simulated function startMicroWaveExplode(vector HitLocation, vector HitNormal)
 {
-	MicroWaveExplosionActor = Spawn(class'KFExplosionActorReplicated', self,, HitLocation, rotator(HitNormal),,true);
+	MicroWaveExplosionActor = Spawn(class'KFExplosionActorReplicated', self,, HitLocation, rotator(HitNormal));
 	if (MicroWaveExplosionActor != None)
 	{
 		MicroWaveExplosionActor.Instigator = Instigator;
@@ -632,7 +632,6 @@ simulated function startMicroWaveExplode(vector HitLocation, vector HitNormal)
 
 
 		MicroWaveExplosionActor.Explode(MicroWaveExplosionTemplate);	
-		MicroWaveExplosionActor.LifeSpan = 1;	
 	}
 
 	SetTimer(0.25,false,nameof(ReExplodeMicroWave));
@@ -647,7 +646,6 @@ simulated function ReExplodeMicroWave()
 	{
 		if (KFPawn(StuckToActor).Health<=0)
 		{
-			MicroWaveExplosionActor.Destroy();
 			return;
 		}
 		
@@ -655,7 +653,6 @@ simulated function ReExplodeMicroWave()
 
 	if (bMaxMicroWaveExplosionCount<=0)
 	{
-		MicroWaveExplosionActor.Destroy();
 		return;
 	}
 
@@ -677,10 +674,6 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 	if (bMaxExplosionCount>0)
 	{
 		SetTimer(0.25,false,nameof(ReExplode));
-	}else
-	{
-		ExplosionActor.Destroy();
-		Destroyed();
 	}
 }
 
@@ -693,7 +686,6 @@ simulated function ReExplode()
 	{
 		if (KFPawn(StuckToActor).Health<=0)
 		{
-			Destroyed();
 			return;
 		}
 		
@@ -702,7 +694,6 @@ simulated function ReExplode()
 	if (bMaxExplosionCount<=0)
 	{
 		bHasExploded=true;
-		ExplosionActor.destroy();
 		return;
 	}
 	bHasExploded=false;
@@ -896,9 +887,9 @@ defaultproperties
 		// ExplosionEffects=KFImpactEffectInfo'WEP_SeekerSix_ARCH.FX_SeekerSix_Explosion'
 		// ExplosionEffects=KFImpactEffectInfo'WEP_Flamethrower_ARCH.GroundFire_Splash_Impacts'
 		// ExplosionSound=AkEvent'WW_WEP_SA_HX25.Play_WEP_SA_HX25_Explosion'
-		ExplosionSound=none
+		ExplosionSound=AkEvent'WW_WEP_SA_Microwave_Gun.Play_SA_MicrowaveGun_Fire_Secondary_3P'
 
-
+		ParticleEmitterTemplate=ParticleSystem'ZED_Husk_EMIT.FX_Neck_Embers_01'
         // Dynamic Light
         ExploLight=ExplosionPointLight
         ExploLightStartFadeOutTime=0.0
@@ -943,15 +934,14 @@ defaultproperties
 		ExplosionEffects=none
 		
 		// ExplosionSound=AkEvent'WW_WEP_EXP_C4.Play_WEP_EXP_C4_Explosion'
-		ExplosionSound=AkEvent'WW_WEP_SA_Microwave_Gun.Play_SA_MicrowaveGun_Fire_Secondary_3P'
+		ExplosionSound=none
 
 		// ParticleSystem'WEP_HuskCannon_EMIT.FX_Huskcannon_groundfire_L3'
 		// ParticleSystem'WEP_Microwave_Gun_EMIT.FX_Microwave_impact_01'
 		// ParticleSystem'WEP_Microwave_Gun_EMIT.FX_Microwave_muzzle_01'
 		// ParticleSystem'ZED_Husk_EMIT.FX_Neck_Embers_01'
 		
-		ParticleEmitterTemplate=ParticleSystem'ZED_Husk_EMIT.FX_Neck_Embers_01'
-		ExplosionEmitterScale = 3.0f
+		
 	    // Dynamic Light
 	    ExploLight=MicroWaveExplosionPointLight
 	    ExploLightStartFadeOutTime=0.0
