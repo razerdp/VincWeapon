@@ -68,7 +68,6 @@ defaultproperties
 	GroupPriority=75
 	WeaponSelectTexture=Texture2D'WEP_UI_M14EBR_TEX.UI_WeaponSelect_SM14-EBR'
    	AssociatedPerkClasses(0)=class'KFPerk_FieldMedic'
-   	// AssociatedPerkClasses(1)=class'KFPerk_Sharpshooter'
 
 
  	// 2D scene capture

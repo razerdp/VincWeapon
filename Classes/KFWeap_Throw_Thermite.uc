@@ -227,6 +227,10 @@ simulated function BeginFire( byte FireModeNum )
 	if( FireModeNum == DETONATE_FIREMODE && (IsInState('WeaponSprinting') || NumDeployedCharges <= 0))
 	{
 		PrepareAndDetonate();
+
+	}else if(FireModeNum == THROW_FIREMODE && NumDeployedCharges>1 )
+	{
+		PrepareAndDetonate();
 	}
 	else
 	{

@@ -608,14 +608,11 @@ function Detonate()
 
 simulated function startMicroWaveExplode(vector HitLocation, vector HitNormal)
 {
-	MicroWaveExplosionActor = Spawn(class'KFExplosionActorReplicated', self,, HitLocation, rotator(HitNormal));
+	MicroWaveExplosionActor = Spawn(class'KFExplosionActorReplicated', self,, HitLocation, rotator(HitNormal),,true);
 	if (MicroWaveExplosionActor != None)
 	{
 		MicroWaveExplosionActor.Instigator = Instigator;
 		MicroWaveExplosionActor.InstigatorController = InstigatorController;
-		// enable muzzle location sync
-		MicroWaveExplosionActor.bReplicateInstigator = true;
-		MicroWaveExplosionActor.bSyncParticlesToMuzzle = true;
 
 		PrepareExplosionTemplate();
 
@@ -634,13 +631,11 @@ simulated function startMicroWaveExplode(vector HitLocation, vector HitNormal)
 		MicroWaveExplosionTemplate.HitNormal = HitNormal;
 
 
-		MicroWaveExplosionActor.Explode(MicroWaveExplosionTemplate);		
+		MicroWaveExplosionActor.Explode(MicroWaveExplosionTemplate);	
+		MicroWaveExplosionActor.LifeSpan = 1;	
 	}
 
-	if (bMaxMicroWaveExplosionCount>0)
-	{
-		SetTimer(0.25,false,nameof(ReExplodeMicroWave));
-	}
+	SetTimer(0.25,false,nameof(ReExplodeMicroWave));
 
 }
 
@@ -652,7 +647,7 @@ simulated function ReExplodeMicroWave()
 	{
 		if (KFPawn(StuckToActor).Health<=0)
 		{
-			Destroyed();
+			MicroWaveExplosionActor.Destroy();
 			return;
 		}
 		
@@ -660,6 +655,7 @@ simulated function ReExplodeMicroWave()
 
 	if (bMaxMicroWaveExplosionCount<=0)
 	{
+		MicroWaveExplosionActor.Destroy();
 		return;
 	}
 
@@ -681,6 +677,10 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 	if (bMaxExplosionCount>0)
 	{
 		SetTimer(0.25,false,nameof(ReExplode));
+	}else
+	{
+		ExplosionActor.Destroy();
+		Destroyed();
 	}
 }
 
@@ -702,6 +702,7 @@ simulated function ReExplode()
 	if (bMaxExplosionCount<=0)
 	{
 		bHasExploded=true;
+		ExplosionActor.destroy();
 		return;
 	}
 	bHasExploded=false;
@@ -794,8 +795,8 @@ defaultproperties
 {
 	StuckToBoneIdx=INDEX_NONE
 
-	bMaxExplosionCount = 30
-	bMaxMicroWaveExplosionCount = 33
+	bMaxExplosionCount = 20
+	bMaxMicroWaveExplosionCount = 20
 
 	Physics=PHYS_Falling
 	MaxSpeed=1200.0
@@ -888,13 +889,14 @@ defaultproperties
 		// Damage Effects
 		MyDamageType=class'KFDT_Throw_Thermite'
 		KnockDownStrength=0
+		KnockDownRadius=0
 		FractureMeshRadius=200.0
 		FracturePartVel=500.0
 
-		ExplosionEffects=KFImpactEffectInfo'WEP_SeekerSix_ARCH.FX_SeekerSix_Explosion'
+		// ExplosionEffects=KFImpactEffectInfo'WEP_SeekerSix_ARCH.FX_SeekerSix_Explosion'
+		// ExplosionEffects=KFImpactEffectInfo'WEP_Flamethrower_ARCH.GroundFire_Splash_Impacts'
 		// ExplosionSound=AkEvent'WW_WEP_SA_HX25.Play_WEP_SA_HX25_Explosion'
 		ExplosionSound=none
-
 
 
         // Dynamic Light
@@ -903,10 +905,10 @@ defaultproperties
         ExploLightFadeOutTime=0.2
 
 		// Camera Shake
-		CamShake=CameraShake'FX_CameraShake_Arch.Grenades.Default_Grenade'
-		CamShakeInnerRadius=200
-		CamShakeOuterRadius=900
-		CamShakeFalloff=1.5f
+		CamShake=none
+		CamShakeInnerRadius=0
+		CamShakeOuterRadius=0
+		CamShakeFalloff=0
 		bOrientCameraShakeTowardsEpicenter=true
 	End Object
 	ExplosionTemplate=ExploTemplate0
@@ -927,34 +929,40 @@ defaultproperties
 
 	Begin Object Class=KFGameExplosion Name=MicroWaveExplosionTemplate0
 		Damage=15
-	    DamageRadius=200
+	    DamageRadius=100
 		DamageFalloffExponent=0.f
 		DamageDelay=0.f
 
 		// Damage Effects
 		MyDamageType=class'KFDT_Throw_Thermite_MicroWave'
 		KnockDownStrength=0
+		KnockDownRadius=0
 		FractureMeshRadius=200.0
 		FracturePartVel=500.0
 		// ExplosionEffects=KFImpactEffectInfo'WEP_C4_ARCH.C4_Explosion'
-		ExplosionEffects=KFImpactEffectInfo'wep_molotov_arch.Molotov_GroundFire'
+		ExplosionEffects=none
 		
 		// ExplosionSound=AkEvent'WW_WEP_EXP_C4.Play_WEP_EXP_C4_Explosion'
-		ExplosionSound=AkEvent'WW_WEP_SA_Microwave_Gun.Play_SA_MicrowaveGun_Fire_Secondary_1P'
+		ExplosionSound=AkEvent'WW_WEP_SA_Microwave_Gun.Play_SA_MicrowaveGun_Fire_Secondary_3P'
 
-
+		// ParticleSystem'WEP_HuskCannon_EMIT.FX_Huskcannon_groundfire_L3'
+		// ParticleSystem'WEP_Microwave_Gun_EMIT.FX_Microwave_impact_01'
+		// ParticleSystem'WEP_Microwave_Gun_EMIT.FX_Microwave_muzzle_01'
+		// ParticleSystem'ZED_Husk_EMIT.FX_Neck_Embers_01'
+		
+		ParticleEmitterTemplate=ParticleSystem'ZED_Husk_EMIT.FX_Neck_Embers_01'
+		ExplosionEmitterScale = 3.0f
 	    // Dynamic Light
 	    ExploLight=MicroWaveExplosionPointLight
 	    ExploLightStartFadeOutTime=0.0
 	    ExploLightFadeOutTime=0.2
-	    ParticleEmitterTemplate=ParticleSystem'WEP_Microwave_Gun_EMIT.FX_Microwave_Blast_01'
 
-
+	    
 		// Camera Shake
-		CamShake=CameraShake'FX_CameraShake_Arch.Grenades.Default_Grenade'
-		CamShakeInnerRadius=200
-		CamShakeOuterRadius=900
-		CamShakeFalloff=1.5f
+		CamShake=none
+		CamShakeInnerRadius=0
+		CamShakeOuterRadius=0
+		CamShakeFalloff=0
 		bOrientCameraShakeTowardsEpicenter=true
 	End Object
 	MicroWaveExplosionTemplate = MicroWaveExplosionTemplate0

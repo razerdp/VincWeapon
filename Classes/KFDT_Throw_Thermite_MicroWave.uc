@@ -35,7 +35,7 @@ defaultproperties
 
 
 	BurnPower=10 //2.5
-	MicrowavePower=10
+	MicrowavePower=0
 	StumblePower=0
 
 	EffectGroup=255 //None

@@ -125,7 +125,6 @@ defaultproperties
 
     WeaponDef=class'VincWeapon.KFWeapDef_M14_Medic'
     ModifierPerkList(0)=class'KFPerk_FieldMedic'
-    ModifierPerkList(1)=class'KFPerk_Sharpshooter'
 
     TubeAttachClass=class'KFWeapActor_Hemogoblin_Tube'
 }
