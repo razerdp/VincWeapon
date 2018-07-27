@@ -62,12 +62,14 @@ reliable client function ClientWeaponSet(bool bOptionalSet, optional bool bDoNot
 defaultproperties
 {
 
-	HealAmount=30
+	HealAmount=25
 	// Inventory / Grouping
 	InventorySize=8
 	GroupPriority=75
 	WeaponSelectTexture=Texture2D'WEP_UI_M14EBR_TEX.UI_WeaponSelect_SM14-EBR'
    	AssociatedPerkClasses(0)=class'KFPerk_FieldMedic'
+   	// AssociatedPerkClasses(1)=class'KFPerk_Sharpshooter'
+
 
  	// 2D scene capture
 	Begin Object Name=SceneCapture2DComponent0
@@ -136,7 +138,7 @@ defaultproperties
 	FiringStatesArray(DEFAULT_FIREMODE)=WeaponSingleFiring
 	WeaponFireTypes(DEFAULT_FIREMODE)=EWFT_InstantHit
 	WeaponProjectiles(DEFAULT_FIREMODE)=class'KFProj_Bullet_M14EBR'
-	InstantHitDamage(DEFAULT_FIREMODE)=90.0 //90
+	InstantHitDamage(DEFAULT_FIREMODE)=80.0 //90
 	InstantHitDamageTypes(DEFAULT_FIREMODE)=class'KFDT_Ballistic_M14_Medic'
 	FireInterval(DEFAULT_FIREMODE)=0.30 //200RPM
 	PenetrationPower(DEFAULT_FIREMODE)=1.5
@@ -171,6 +173,6 @@ defaultproperties
 	WeaponFireWaveForm=ForceFeedbackWaveform'FX_ForceFeedback_ARCH.Gunfire.Heavy_Recoil'
 
 	// Weapon Upgrade stat boosts
-	WeaponUpgrades[1]=(IncrementDamage=1.2f,IncrementHeal=1.1f,IncrementWeight=1)
-	WeaponUpgrades[2]=(IncrementDamage=1.35f,IncrementHeal=1.2f,IncrementWeight=2)
+	WeaponUpgrades[1]=(IncrementDamage=1.15f,IncrementHeal=1.15f,IncrementWeight=1)
+	WeaponUpgrades[2]=(IncrementDamage=1.30f,IncrementHeal=1.30f,IncrementWeight=2)
 }

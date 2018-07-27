@@ -112,7 +112,7 @@ defaultproperties
     StumblePower=200
     GunHitPower=0
     MeleeHitPower=0
-    BleedPower=35
+    BleedPower=20
 
     BloodSpread=0.2
 	BloodScale=0.3
@@ -120,7 +120,7 @@ defaultproperties
     DoT_Type=DOT_Bleeding
     DoT_Duration=2.5 //10
     DoT_Interval=0.5 //1.0
-    DoT_DamageScale=0.10 //0.5
+    DoT_DamageScale=0.125 //0.5
 	bStackDoT=true
 
     WeaponDef=class'VincWeapon.KFWeapDef_M14_Medic'
